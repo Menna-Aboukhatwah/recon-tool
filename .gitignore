@@ -1,1 +1,18 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
 
+# Virtual environments
+venv/
+env/
+ENV/
+
+# Local reports generated during testing
+recon_tool/reports/*
+!recon_tool/reports/example.com_sample.txt
+!recon_tool/reports/example.com_sample.html
+
+# Operating system files
+.DS_Store
+Thumbs.db
