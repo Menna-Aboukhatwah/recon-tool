@@ -1,39 +1,48 @@
 import argparse
+import sys
 from utils.logger import setup_logger
 
+# Import the passive modules we created
+from modules.whois_lookup import run_whois
+from modules.dns_enum import run_dns_enum
+from modules.subdomain_enum import run_subdomain_enum
+
 def main():
-    # 1. Initialize the Command-Line Argument Parser
     parser = argparse.ArgumentParser(
         description="Custom Reconnaissance Tool - Automated Security Information Gathering"
     )
-    
-    # Core target configuration
     parser.add_argument("-t", "--target", help="Target domain name or IP address", required=True)
-    
-    # Verbosity configuration
     parser.add_argument("-v", "--verbose", help="Enable verbose (DEBUG) logging output", action="store_true")
-
-    # Flag placeholders for individual feature modules (to be built in later steps)
+    
+    # Module activation flags
     parser.add_argument("--whois", help="Run WHOIS lookups", action="store_true")
     parser.add_argument("--dns", help="Run DNS enumeration", action="store_true")
-    parser.add_argument("--port-scan", help="Run active port scanning", action="store_true")
+    parser.add_argument("--subdomains", help="Run passive subdomain enumeration", action="store_true")
 
-    # Parse arguments provided by user execution
     args = parser.parse_args()
-
-    # 2. Initialize our custom logger using the verbose user flag
     logger = setup_logger(verbose=args.verbose)
 
     logger.info(f"Starting reconnaissance engine against target: {args.target}")
-    logger.debug("Verbose logging is enabled. Diagnostic details will be shown.")
 
-    # Contextual routing triggers (Logic will expand as modules are built)
+    # Ensure at least one scanning module flag is specified by user
+    if not (args.whois or args.dns or args.subdomains):
+        logger.error("No assessment flags provided. Please specify --whois, --dns, or --subdomains.")
+        sys.exit(1)
+
+    # Dictionary container to aggregate runtime results
+    scan_results = {}
+
     if args.whois:
-        logger.info("WHOIS module triggered (Awaiting module implementation...)")
+        scan_results["whois"] = run_whois(args.target)
+        print(f"\n[+] WHOIS Results Summary:\n{scan_results['whois']}")
+
     if args.dns:
-        logger.info("DNS module triggered (Awaiting module implementation...)")
-    if args.port_scan:
-        logger.info("Port scanning module triggered (Awaiting module implementation...)")
+        scan_results["dns"] = run_dns_enum(args.target)
+        print(f"\n[+] DNS Results Summary:\n{scan_results['dns']}")
+
+    if args.subdomains:
+        scan_results["subdomains"] = run_subdomain_enum(args.target)
+        print(f"\n[+] Extracted Subdomains Summary:\n{scan_results['subdomains']}")
 
 if __name__ == "__main__":
     main()
