@@ -1,0 +1,13 @@
+# Python cache and environments
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+env/
+
+# Git history
+.git/
+.gitignore
+
+# Local reports
+reports/
