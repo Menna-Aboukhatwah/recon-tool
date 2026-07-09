@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>ReconX Report - example.com</title>
+<style>
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #0f1117; color: #e6e6e6; margin: 0; padding: 0 0 60px 0; }
+  header { background: #161a23; padding: 30px 40px; border-bottom: 3px solid #3b82f6; }
+  header h1 { margin: 0; color: #3b82f6; }
+  header p { margin: 6px 0 0 0; color: #9ca3af; }
+  .meta { display: flex; gap: 40px; margin-top: 14px; }
+  .meta div { background: #1e2330; padding: 10px 16px; border-radius: 6px; }
+  .meta span { display: block; font-size: 12px; color: #9ca3af; }
+  main { padding: 20px 40px; }
+  section.module { background: #161a23; border: 1px solid #262c3b; border-radius: 8px; margin-bottom: 20px; padding: 18px 24px; }
+  section.module h2 { color: #3b82f6; margin-top: 0; font-size: 16px; letter-spacing: 0.5px; }
+  pre { white-space: pre-wrap; word-break: break-word; background: #0f1117; padding: 14px; border-radius: 6px; overflow-x: auto; font-size: 13px; line-height: 1.5; }
+  footer { text-align: center; color: #6b7280; font-size: 12px; padding: 20px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>ReconX Reconnaissance Report</h1>
+  <p>Automated recon summary generated for authorized security testing.</p>
+  <div class="meta">
+    <div><span>Target Domain</span>example.com</div>
+    <div><span>Resolved IP</span>172.66.147.243</div>
+    <div><span>Generated At</span>2026-07-09 13:21:27 UTC</div>
+  </div>
+</header>
+<main>
+  
+        <section class="module">
+          <h2>WHOIS</h2>
+          <pre>{
+  &quot;domain_name&quot;: &quot;EXAMPLE.COM&quot;,
+  &quot;registrar&quot;: &quot;RESERVED-Internet Assigned Numbers Authority&quot;,
+  &quot;whois_server&quot;: &quot;whois.iana.org&quot;,
+  &quot;creation_date&quot;: &quot;1995-08-14 04:00:00+00:00&quot;,
+  &quot;expiration_date&quot;: &quot;2026-08-13 04:00:00+00:00&quot;,
+  &quot;updated_date&quot;: &quot;2026-01-16 18:26:50+00:00&quot;,
+  &quot;name_servers&quot;: &quot;ELLIOTT.NS.CLOUDFLARE.COM, HERA.NS.CLOUDFLARE.COM&quot;,
+  &quot;status&quot;: &quot;clientDeleteProhibited https://icann.org/epp#clientDeleteProhibited, clientTransferProhibited https://icann.org/epp#clientTransferProhibited, clientUpdateProhibited https://icann.org/epp#clientUpdateProhibited&quot;,
+  &quot;emails&quot;: &quot;N/A&quot;,
+  &quot;org&quot;: &quot;N/A&quot;,
+  &quot;country&quot;: &quot;N/A&quot;
+}</pre>
+        </section>
+        
+        <section class="module">
+          <h2>DNS_ENUMERATION</h2>
+          <pre>{
+  &quot;A&quot;: [
+    &quot;104.20.23.154&quot;,
+    &quot;172.66.147.243&quot;
+  ],
+  &quot;AAAA&quot;: [
+    &quot;2606:4700:10::6814:179a&quot;,
+    &quot;2606:4700:10::ac42:93f3&quot;
+  ],
+  &quot;MX&quot;: [
+    &quot;0 .&quot;
+  ],
+  &quot;TXT&quot;: [
+    &quot;\&quot;_k2n1y4vw3qtb4skdx9e7dxt97qrmmq9\&quot;&quot;,
+    &quot;\&quot;v=spf1 -all\&quot;&quot;
+  ],
+  &quot;NS&quot;: [
+    &quot;elliott.ns.cloudflare.com.&quot;,
+    &quot;hera.ns.cloudflare.com.&quot;
+  ],
+  &quot;CNAME&quot;: [],
+  &quot;SOA&quot;: [
+    &quot;elliott.ns.cloudflare.com. dns.cloudflare.com. 2407636105 10000 2400 604800 1800&quot;
+  ],
+  &quot;resolved_ip&quot;: &quot;172.66.147.243&quot;
+}</pre>
+        </section>
+        
+        <section class="module">
+          <h2>SUBDOMAIN_ENUMERATION</h2>
+          <pre>[
+  &quot;as207960 test intermediate - example.com&quot;,
+  &quot;dev.example.com&quot;,
+  &quot;example.com&quot;,
+  &quot;m.example.com&quot;,
+  &quot;m.testexample.com&quot;,
+  &quot;products.example.com&quot;,
+  &quot;subjectname@example.com&quot;,
+  &quot;support.example.com&quot;,
+  &quot;user@example.com&quot;,
+  &quot;www.example.com&quot;
+]</pre>
+        </section>
+        
+        <section class="module">
+          <h2>PORT_SCAN</h2>
+          <pre>{
+  &quot;engine&quot;: &quot;socket&quot;,
+  &quot;open_ports&quot;: [
+    80,
+    443,
+    8080,
+    8443
+  ]
+}</pre>
+        </section>
+        
+        <section class="module">
+          <h2>BANNER_GRAB</h2>
+          <pre>{
+  &quot;80&quot;: &quot;HTTP/1.1 403 Forbidden\r\nDate: Thu, 09 Jul 2026 13:21:20 GMT\r\nContent-Type: text/plain; charset=UTF-8\r\nContent-Length: 17\r\nConnection: close\r\nCache-Control: private, max-age=0, no-store, no-cache, must-revalidate, post-check=0, pre-check=0\r\nExpires: Thu, 01 Jan 1970 00:00:01 GMT\r\nReferrer-Policy: same-origin\r\nX-Frame-Options: SAMEORIGIN\r\nServer: cloudflare\r\nCF-RAY: a187a1991a74d4da-MRS&quot;,
+  &quot;443&quot;: &quot;No banner retrieved&quot;,
+  &quot;8080&quot;: &quot;HTTP/1.1 403 Forbidden\r\nDate: Thu, 09 Jul 2026 13:21:23 GMT\r\nContent-Type: text/plain; charset=UTF-8\r\nContent-Length: 17\r\nConnection: close\r\nCache-Control: private, max-age=0, no-store, no-cache, must-revalidate, post-check=0, pre-check=0\r\nExpires: Thu, 01 Jan 1970 00:00:01 GMT\r\nReferrer-Policy: same-origin\r\nX-Frame-Options: SAMEORIGIN\r\nServer: cloudflare\r\nCF-RAY: a187a1a70c83e18d-MRS&quot;,
+  &quot;8443&quot;: &quot;No banner retrieved&quot;
+}</pre>
+        </section>
+        
+        <section class="module">
+          <h2>TECH_DETECTION</h2>
+          <pre>{
+  &quot;https&quot;: {
+    &quot;technologies&quot;: [
+      &quot;Cloudflare&quot;,
+      &quot;server: cloudflare&quot;
+    ],
+    &quot;headers&quot;: {
+      &quot;Date&quot;: &quot;Thu, 09 Jul 2026 13:21:26 GMT&quot;,
+      &quot;Content-Type&quot;: &quot;text/html&quot;,
+      &quot;Transfer-Encoding&quot;: &quot;chunked&quot;,
+      &quot;Connection&quot;: &quot;keep-alive&quot;,
+      &quot;Server&quot;: &quot;cloudflare&quot;,
+      &quot;Last-Modified&quot;: &quot;Wed, 01 Jul 2026 17:50:18 GMT&quot;,
+      &quot;Allow&quot;: &quot;GET, HEAD&quot;,
+      &quot;Age&quot;: &quot;11272&quot;,
+      &quot;Cf-Cache-Status&quot;: &quot;HIT&quot;,
+      &quot;Content-Encoding&quot;: &quot;gzip&quot;,
+      &quot;CF-RAY&quot;: &quot;a187a1bc99d54aaf-MRS&quot;
+    },
+    &quot;error&quot;: null
+  },
+  &quot;http&quot;: {
+    &quot;technologies&quot;: [
+      &quot;Cloudflare&quot;,
+      &quot;server: cloudflare&quot;
+    ],
+    &quot;headers&quot;: {
+      &quot;Date&quot;: &quot;Thu, 09 Jul 2026 13:21:26 GMT&quot;,
+      &quot;Content-Type&quot;: &quot;text/html&quot;,
+      &quot;Transfer-Encoding&quot;: &quot;chunked&quot;,
+      &quot;Connection&quot;: &quot;keep-alive&quot;,
+      &quot;Server&quot;: &quot;cloudflare&quot;,
+      &quot;Last-Modified&quot;: &quot;Wed, 01 Jul 2026 17:52:37 GMT&quot;,
+      &quot;Allow&quot;: &quot;GET, HEAD&quot;,
+      &quot;Cf-Cache-Status&quot;: &quot;HIT&quot;,
+      &quot;Age&quot;: &quot;11273&quot;,
+      &quot;Content-Encoding&quot;: &quot;gzip&quot;,
+      &quot;CF-RAY&quot;: &quot;a187a1bf1d22e18d-MRS&quot;
+    },
+    &quot;error&quot;: null
+  }
+}</pre>
+        </section>
+        
+</main>
+<footer>Generated by ReconX &mdash; for use only against systems you are authorized to test.</footer>
+</body>
+</html>
